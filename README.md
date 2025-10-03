@@ -51,22 +51,22 @@ pip install simple-api-mock-server
 1.  **Clone the repository:**
 
     ```bash
-git clone https://github.com/sanatladkat/simple-api-mock-server.git
-cd simple-api-mock-server
+    git clone https://github.com/sanatladkat/simple-api-mock-server.git
+    cd simple-api-mock-server
     ```
 
 2.  **Create a virtual environment:**
 
     ```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+    python -m venv venv
+    source venv/bin/activate  # On Windows: venv\Scripts\activate
     ```
 
 3.  **Install dependencies:**
 
     ```bash
-pip install -r requirements.txt
-pip install -e .
+    pip install -r requirements.txt
+    pip install -e .
     ```
 
 ## 🚀 Quick Start
@@ -76,19 +76,19 @@ To get a mock server up and running quickly:
 1.  **Create a file `api.json` or `api.yaml`** with the following content:
 
     ```yaml
-- path: /hello
-  methods:
-    - GET
-  response:
-    data:
-      message: "Hello, world!"
-    code: 200
+    - path: /hello
+      methods:
+        - GET
+      response:
+        data:
+          message: "Hello, world!"
+        code: 200
     ```
 
 2.  **Run the server** from your project root:
 
     ```bash
-simple-mock-server --config api.yaml
+    simple-mock-server --config api.yaml
     ```
 
 3.  **Visit:** `http://localhost:5001/hello` in your browser or API client.
@@ -265,6 +265,199 @@ The configuration file (JSON or YAML) is a list of route objects. Each route obj
 
 For a more comprehensive example, refer to the `api.json` example below.
 
+### `api.json` Example
+
+```json
+[
+  {
+    "path": "/",
+    "methods": ["GET"],
+    "description": "Welcome endpoint",
+    "tags": ["General"],
+    "response": {
+      "data": {"message": "Welcome to the mock server!"},
+      "code": 200
+    }
+  },
+  {
+    "path": "/api/users",
+    "methods": ["GET"],
+    "description": "Get all users",
+    "tags": ["Users"],
+    "response": {
+      "data": [
+        {"id": 1, "name": "John Doe"},
+        {"id": 2, "name": "Jane Doe"}
+      ],
+      "code": 200
+    }
+  },
+  {
+    "path": "/api/users",
+    "methods": ["POST"],
+    "description": "Create a new user",
+    "tags": ["Users"],
+    "request_body": {"name": "string", "email": "string"},
+    "response": {
+      "data": {"message": "User {body_param:name} created successfully"},
+      "code": 201
+    }
+  },
+  {
+    "path": "/api/users/{user_id}",
+    "methods": ["GET"],
+    "description": "Get user by ID",
+    "tags": ["Users"],
+    "response": {
+      "data": {"id": "{user_id}", "name": "User {user_id}"},
+      "headers": {"X-User-Id": "{user_id}"},
+      "code": 200
+    }
+  },
+  {
+    "path": "/api/users/{user_id}",
+    "methods": ["PUT"],
+    "description": "Update user by ID",
+    "tags": ["Users"],
+    "request_body": {"name": "string"},
+    "response": {
+      "data": {"message": "User {user_id} updated successfully"},
+      "code": 200
+    }
+  },
+  {
+    "path": "/api/users/{user_id}",
+    "methods": ["DELETE"],
+    "description": "Delete user by ID",
+    "tags": ["Users"],
+    "response": {
+      "data": {},
+      "code": 204
+    }
+  },
+  {
+    "path": "/api/echo",
+    "methods": ["POST"],
+    "description": "Echoes the request body",
+    "tags": ["Utilities"],
+    "response": {
+      "data": {"echo": true},
+      "code": 200
+    }
+  },
+  {
+    "path": "/api/greet",
+    "methods": ["GET"],
+    "description": "Greet a user by name from query param",
+    "tags": ["Utilities"],
+    "response": {
+      "data": {"message": "Hello, {query_param:name}!"},
+      "code": 200
+    }
+  },
+  {
+    "path": "/api/slow-response",
+    "methods": ["GET"],
+    "description": "Simulates a slow network response",
+    "tags": ["Utilities"],
+    "response": {
+      "data": {"message": "This was a slow response"},
+      "delay": 2,
+      "code": 200
+    }
+  },
+  {
+    "path": "/api/custom-headers",
+    "methods": ["GET"],
+    "description": "Returns a response with custom headers",
+    "tags": ["Utilities"],
+    "response": {
+      "data": {"message": "This response has custom headers"},
+      "headers": {
+        "X-Custom-Header": "MyValue",
+        "Content-Type": "application/json"
+      },
+      "code": 200
+    }
+  },
+  {
+    "path": "/api/protected",
+    "methods": ["GET"],
+    "description": "Protected endpoint with API key authentication",
+    "tags": ["Authentication"],
+    "response": {
+      "data": {"message": "Access granted!"},
+      "code": 200
+    },
+    "auth": {"api_key": "my-secret-api-key"}
+  },
+  {
+    "path": "/api/basic-auth",
+    "methods": ["GET"],
+    "description": "Protected endpoint with Basic authentication",
+    "tags": ["Authentication"],
+    "response": {
+      "data": {"message": "Basic Auth successful!"},
+      "code": 200
+    },
+    "auth": {"basic_auth": {"username": "user", "password": "pass"}}
+  },
+  {
+    "path": "/api/bearer-token",
+    "methods": ["GET"],
+    "description": "Protected endpoint with Bearer token authentication",
+    "tags": ["Authentication"],
+    "response": {
+      "data": {"message": "Bearer Token successful!"},
+      "code": 200
+    },
+    "auth": {"bearer_token": "my-secret-token"}
+  },
+  {
+    "path": "/api/public",
+    "methods": ["GET"],
+    "description": "Public endpoint without authentication",
+    "tags": ["Authentication"],
+    "response": {
+      "data": {"message": "This is a public endpoint!"},
+      "code": 200
+    },
+    "auth": {"skip_auth": true}
+  },
+  {
+    "path": "/api/error",
+    "methods": ["GET"],
+    "description": "Simulates an internal server error",
+    "tags": ["Error Simulation"],
+    "response": {
+      "data": {"message": "Something went wrong!"},
+      "code": 500
+    }
+  },
+  {
+    "path": "/api/not-found",
+    "methods": ["GET"],
+    "description": "Simulates a resource not found error",
+    "tags": ["Error Simulation"],
+    "response": {
+      "data": {"message": "Resource not found!"},
+      "code": 404
+    }
+  },
+  {
+    "path": "/api/rate-limited",
+    "methods": ["GET"],
+    "description": "Endpoint with rate limiting enabled (2 requests per 60 seconds)",
+    "tags": ["Rate Limiting"],
+    "response": {
+      "data": {"message": "You are not rate limited yet!"},
+      "code": 200
+    },
+    "rate_limit": {"requests": 2, "window": 60}
+  }
+]
+```
+
 ## Testing
 
 To run the unit and integration tests, navigate to the project root and execute:
@@ -285,5 +478,3 @@ See the [CHANGELOG.md](CHANGELOG.md) for details on releases and changes.
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-
