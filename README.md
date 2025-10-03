@@ -88,7 +88,7 @@ To get a mock server up and running quickly:
 2.  **Run the server** from your project root:
 
     ```bash
-    simple-mock-server --config api.yaml
+      simple-mock-server --config api.yaml
     ```
 
 3.  **Visit:** `http://localhost:5001/hello` in your browser or API client.
@@ -112,7 +112,7 @@ pip install simple-api-mock-server
 2.  **Run the server:**
 
     ```bash
-simple-mock-server --config api.json --port 5001 --debug --verbose --static-folder ./static
+    simple-mock-server --config api.json --port 5001 --debug --verbose --static-folder ./static
     ```
 
     **CLI Options:**
