@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "simple-api-mock-server"
-version = "0.3.1"
+version = "0.3.2"
 authors = [
   { name="Sanat Ladkat", email="arsanatladkat@gmail.com" },
 ]
