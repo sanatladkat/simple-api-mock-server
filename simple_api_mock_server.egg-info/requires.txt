@@ -1,0 +1,9 @@
+Flask
+jsonschema
+watchdog
+Flask-Cors
+PyYAML
+
+[dev]
+requests
+pytest

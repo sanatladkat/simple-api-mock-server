@@ -1,0 +1,104 @@
+[
+    {
+        "path": "/",
+        "methods": ["GET"],
+        "response": {"message": "Welcome to the mock server!"}
+    },
+    {
+        "path": "/api/users",
+        "methods": ["GET"],
+        "response": [
+            {"id": 1, "name": "John Doe"},
+            {"id": 2, "name": "Jane Doe"}
+        ]
+    },
+    {
+        "path": "/api/users",
+        "methods": ["POST"],
+        "response": {"message": "User created successfully"},
+        "code": 201
+    },
+    {
+        "path": "/api/users/{user_id}",
+        "methods": ["GET"],
+        "response": {"id": "{user_id}", "name": "User {user_id}"}
+    },
+    {
+        "path": "/api/users/{user_id}",
+        "methods": ["PUT"],
+        "response": {"message": "User {user_id} updated successfully"}
+    },
+    {
+        "path": "/api/users/{user_id}",
+        "methods": ["DELETE"],
+        "response": {},
+        "code": 204
+    },
+    {
+        "path": "/api/echo",
+        "methods": ["POST"],
+        "response": {"echo": true}
+    },
+    {
+        "path": "/api/greet",
+        "methods": ["GET"],
+        "response": {"message": "Hello, {query_param:name}!"}
+    },
+    {
+        "path": "/api/slow-response",
+        "methods": ["GET"],
+        "response": {"message": "This was a slow response"},
+        "delay": 2
+    },
+    {
+        "path": "/api/custom-headers",
+        "methods": ["GET"],
+        "response": {"message": "This response has custom headers"},
+        "headers": {
+            "X-Custom-Header": "MyValue",
+            "Content-Type": "application/json"
+        }
+    },
+    {
+        "path": "/api/protected",
+        "methods": ["GET"],
+        "response": {"message": "Access granted!"},
+        "auth": {"api_key": "my-secret-api-key"}
+    },
+    {
+        "path": "/api/basic-auth",
+        "methods": ["GET"],
+        "response": {"message": "Basic Auth successful!"},
+        "auth": {"basic_auth": {"username": "user", "password": "pass"}}
+    },
+    {
+        "path": "/api/bearer-token",
+        "methods": ["GET"],
+        "response": {"message": "Bearer Token successful!"},
+        "auth": {"bearer_token": "my-secret-token"}
+    },
+    {
+        "path": "/api/public",
+        "methods": ["GET"],
+        "response": {"message": "This is a public endpoint!"},
+        "auth": {"skip_auth": true}
+    },
+    {
+        "path": "/api/error",
+        "methods": ["GET"],
+        "response": {"message": "Something went wrong!"},
+        "code": 500
+    },
+    {
+        "path": "/api/not-found",
+        "methods": ["GET"],
+        "response": {"message": "Resource not found!"},
+        "code": 404
+    },
+    {
+        "path": "/api/rate-limited",
+        "methods": ["GET"],
+        "response": {"message": "You are not rate limited yet!"},
+        "rate_limit": {"requests": 2, "window": 60}
+    }
+]

@@ -1,0 +1,5 @@
+Flask
+jsonschema
+watchdog
+Flask-Cors
+PyYAML

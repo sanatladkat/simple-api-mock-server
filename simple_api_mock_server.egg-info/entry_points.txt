@@ -1,0 +1,2 @@
+[console_scripts]
+simple-mock-server = simple_mock_server.server:main

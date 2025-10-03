@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "simple-api-mock-server"
+version = "0.3.1"
+authors = [
+  { name="Sanat Ladkat", email="arsanatladkat@gmail.com" },
+]
+description = "A simple, file-based API mocking server."
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Framework :: Flask",
+    "Topic :: Software Development :: Testing",
+    "Topic :: Internet :: WWW/HTTP :: HTTP Servers",
+]
+dependencies = [
+    "Flask",
+    "jsonschema",
+    "watchdog",
+    "Flask-Cors",
+    "PyYAML",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/sanatladkat/simple-api-mock-server"
+"Bug Tracker" = "https://github.com/sanatladkat/simple-api-mock-server/issues"
+
+[project.scripts]
+simple-mock-server = "simple_mock_server.server:main"
+
+[project.optional-dependencies]
+dev = ["requests", "pytest"]
